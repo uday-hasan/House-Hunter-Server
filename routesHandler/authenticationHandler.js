@@ -25,7 +25,7 @@ authenticationHandler.post('/signin', async (req, res) => {
         const isValidPassword = await bcrypt.compare(password, user.password);
         if (isValidPassword) {
             const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '1h' })
-            res.status(200).json({ success: true, token: token, user: email, message: "Login Successful" })
+            res.status(200).json({ success: true, token: token, user: { user: email, role: user.role, name: user.name, mobile: user.mobile }, message: "Login Successful" })
         }
         else {
             res.status(401).json({ success: false, message: "Email or Password not found" })

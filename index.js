@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const authenticationHandler = require('./routesHandler/authenticationHandler')
 const ownerHandler = require('./routesHandler/OwnerHandler')
+const bookingHandler = require('./routesHandler/BookingHandler')
 const app = express()
 app.use(express.json())
 app.use(cors())
@@ -14,6 +15,7 @@ mongoose.connect(process.env.DB_URL).then(() => {
 
 app.use('/authentication', authenticationHandler)
 app.use('/owner', ownerHandler)
+app.use('/booking', bookingHandler)
 
 app.listen(port, () => {
     console.log('Listining from port ' + port);

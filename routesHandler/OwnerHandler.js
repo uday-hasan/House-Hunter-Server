@@ -15,7 +15,6 @@ ownerHandler.post('/add', async (req, res) => {
 })
 
 ownerHandler.get('/all?', async (req, res) => {
-    console.log(req.query)
     const email = req.query.email
     HOUSE.find({ user: email }).then((result) => {
         res.status(200).json({ message: 'OK', success: true, result })
@@ -31,7 +30,6 @@ ownerHandler.delete('/:id', async (req, res) => {
     }).catch(err => {
         res.status(500).json({ message: 'Not OK', success: false })
     })
-    console.log(id)
 })
 
 ownerHandler.put('/edit/:id', async (req, res) => {
@@ -41,6 +39,27 @@ ownerHandler.put('/edit/:id', async (req, res) => {
         res.status(200).json({ message: 'Update successful', success: true })
     }).catch(err => {
         res.status(500).json({ message: 'Something went wrong', success: false })
+    })
+})
+
+ownerHandler.get('/allhouses', async (req, res) => {
+    HOUSE.find({}).select({
+
+    }).then((result) => {
+        console.log(result)
+        res.status(200).json({ message: 'SUCCESS', result })
+    }).catch(err => {
+        res.status(500).json({ message: 'Something went wrong', result })
+    })
+})
+ownerHandler.get('/:id', async (req, res) => {
+    HOUSE.findOne({ _id: req.params.id }).select({
+
+    }).then((result) => {
+        console.log(result)
+        res.status(200).json({ message: 'SUCCESS', result })
+    }).catch(err => {
+        res.status(500).json({ message: 'Something went wrong', result })
     })
 })
 
