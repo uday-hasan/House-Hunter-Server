@@ -14,4 +14,24 @@ ownerHandler.post('/add', async (req, res) => {
     })
 })
 
+ownerHandler.get('/all?', async (req, res) => {
+    console.log(req.query)
+    const email = req.query.email
+    HOUSE.find({ user: email }).then((result) => {
+        res.status(200).json({ message: 'OK', success: true, result })
+    }).catch(err => {
+        res.status(500).json({ message: 'Not Okay', success: false })
+    })
+})
+
+ownerHandler.delete('/:id', async (req, res) => {
+    const id = req.params.id
+    HOUSE.deleteOne({ _id: id }).then(() => {
+        res.status(200).json({ message: 'OK', success: true })
+    }).catch(err => {
+        res.status(500).json({ message: 'Not OK', success: false })
+    })
+    console.log(id)
+})
+
 module.exports = ownerHandler;

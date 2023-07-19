@@ -11,6 +11,7 @@ const OwnerSchema = mongoose.Schema({
     rent: { type: Number, required: true },
     mobile: { type: String, required: true },
     desc: { type: String, required: true },
+    user: { type: String, required: true }
 })
 
 module.exports = OwnerSchema;
