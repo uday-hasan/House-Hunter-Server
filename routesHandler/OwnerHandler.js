@@ -34,4 +34,14 @@ ownerHandler.delete('/:id', async (req, res) => {
     console.log(id)
 })
 
+ownerHandler.put('/edit/:id', async (req, res) => {
+    HOUSE.findByIdAndUpdate(req.params.id, {
+        $set: req.body
+    }).then(() => {
+        res.status(200).json({ message: 'Update successful', success: true })
+    }).catch(err => {
+        res.status(500).json({ message: 'Something went wrong', success: false })
+    })
+})
+
 module.exports = ownerHandler;
