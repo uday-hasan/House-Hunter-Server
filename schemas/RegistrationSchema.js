@@ -7,7 +7,6 @@ const registrationSchema = mongoose.Schema({
     role: {
         type: String,
         enum: ['house-owner', 'house-renter'],
-        // required: true,
     },
     email: {
         type: String, required: true,
